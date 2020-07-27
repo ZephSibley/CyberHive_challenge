@@ -1,7 +1,9 @@
 import psutil
+import sched
+import time
 
 
-def main():
+def get_processes():
     print('*** Running Processes ***')
 
     for proc in psutil.process_iter():
@@ -13,6 +15,10 @@ def main():
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
 
+    s.enter(5, 1, get_processes)
+
 
 if __name__ == '__main__':
-   main()
+    s = sched.scheduler(time.time, time.sleep)
+    s.enter(5, 1, get_processes)
+    s.run()
