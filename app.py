@@ -1,20 +1,16 @@
-import psutil
 import sched
 import time
 
+import psutil
+import requests
+
 
 def get_processes():
-    print('*** Running Processes ***')
+    running_processes = {proc.name() for proc in psutil.process_iter()}
 
-    for proc in psutil.process_iter():
-        try:
-            # Get process name & pid from process object.
-            process_name = proc.name()
-            process_id = proc.pid
-            print(process_name, ' ::: ', process_id)
-        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-            pass
+    requests.post('http://localhost:8080', data=running_processes)
 
+    # Schedule another run
     s.enter(5, 1, get_processes)
 
 
