@@ -7,5 +7,5 @@ app = FastAPI()
 
 @app.post("/")
 async def root(process_list: List):
-    with open('process_log.txt', 'a') as file:
+    with open('process_log.log', 'a') as file:
         file.write(str(process_list) + '\n')
