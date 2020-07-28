@@ -1,5 +1,6 @@
 import sched
 import time
+from datetime import datetime
 
 import psutil
 import requests
@@ -10,7 +11,10 @@ def get_processes():
 
     requests.post(
         'http://localhost:8000',
-        json=list({proc.name() for proc in psutil.process_iter()})
+        json={
+            'running_processes': list({proc.name() for proc in psutil.process_iter()}),
+            'timestamp': str(datetime.now())
+        }
     )
 
 

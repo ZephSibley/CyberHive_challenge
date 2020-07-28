@@ -1,10 +1,17 @@
 from typing import List
 
 from fastapi import FastAPI, Request, Response
+from pydantic import BaseModel
+
+ORIGIN_WHITELIST = ['127.0.0.1']
+
+
+class RunningProcessesSnapshot(BaseModel):
+    running_processes: List
+    timestamp: str
+
 
 app = FastAPI()
-
-ORIGIN_WHITELIST = ['']
 
 
 @app.middleware("http")
@@ -15,6 +22,10 @@ async def check_origin_whitelist(request: Request, call_next):
 
 
 @app.post("/")
-async def root(process_list: List):
+async def root(p: RunningProcessesSnapshot):
     with open('process_log.log', 'a') as file:
-        file.write(str(process_list) + '\n')
+        file.write(
+            "%s %s \n" %
+            (p.timestamp, str(p.running_processes))
+        )
+
