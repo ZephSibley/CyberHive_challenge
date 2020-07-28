@@ -10,3 +10,7 @@ gRPC?
 Server side subscription list/ whitelist
 
 give each client an ID
+
+poetry for managing deps
+
+parameterise server url
