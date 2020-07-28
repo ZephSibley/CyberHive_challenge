@@ -11,7 +11,6 @@ ORIGIN_WHITELIST = ['']
 async def check_origin_whitelist(request: Request, call_next):
     if request.client.host not in ORIGIN_WHITELIST:
         return Response(status_code=401)
-
     return await call_next(request)
 
 
