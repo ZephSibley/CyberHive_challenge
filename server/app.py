@@ -10,10 +10,9 @@ ORIGIN_WHITELIST = ['']
 @app.middleware("http")
 async def check_origin_whitelist(request: Request, call_next):
     if request.client.host not in ORIGIN_WHITELIST:
-        response = Response(status_code=401)
-    else:
-        response = await call_next(request)
-    return response
+        return Response(status_code=401)
+
+    return await call_next(request)
 
 
 @app.post("/")
