@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI, Request, Response
 
 from models.RunningProcessSnapshot import RunningProcessesSnapshot
@@ -15,9 +16,14 @@ async def check_origin_whitelist(request: Request, call_next):
 
 
 @app.post("/")
-async def root(p: RunningProcessesSnapshot):
-    with open('process_log.log', 'a') as file:
+async def root(p: RunningProcessesSnapshot, request: Request):
+    log_file_name = '%s.log' % request.client.host
+    with open(log_file_name, 'a') as file:
         file.write(
             "%s %s \n" %
             (p.timestamp, str(p.running_processes))
         )
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
