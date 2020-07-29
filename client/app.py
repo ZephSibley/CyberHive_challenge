@@ -11,14 +11,20 @@ parser = argparse.ArgumentParser(
     description='This is an application that sends a list of currently running processes to a specified server every '
                 'five seconds.'
 )
-parser.parse_args()
+parser.add_argument(
+    '-t', '--target-server',
+    help="The server we want to send the information to",
+    required=True,
+    action='store'
+)
+args = parser.parse_args()
 
 
 def get_processes():
     scheduler.enter(5, 1, get_processes)
 
     requests.post(
-        'http://localhost:8000',
+        args.target_server,
         json={
             'running_processes': list({proc.name() for proc in psutil.process_iter()}),
             'timestamp': str(datetime.now())
