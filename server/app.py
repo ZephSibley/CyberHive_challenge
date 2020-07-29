@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request, Response
 
 from models.RunningProcessSnapshot import RunningProcessesSnapshot
 
-ORIGIN_WHITELIST = ['127.0.0.1']
+ORIGIN_WHITELIST = ['127.0.0.1', 'testclient']
 
 app = FastAPI()
 
