@@ -1,9 +1,6 @@
-from typing import List
-
 from fastapi import FastAPI, Request, Response
-from pydantic import BaseModel
 
-from server.models.RunningProcessSnapshot import RunningProcessesSnapshot
+from models.RunningProcessSnapshot import RunningProcessesSnapshot
 
 ORIGIN_WHITELIST = ['127.0.0.1']
 
