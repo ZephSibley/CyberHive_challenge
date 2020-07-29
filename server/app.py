@@ -4,7 +4,6 @@ from models.RunningProcessSnapshot import RunningProcessesSnapshot
 
 ORIGIN_WHITELIST = ['127.0.0.1']
 
-
 app = FastAPI()
 
 
@@ -22,4 +21,3 @@ async def root(p: RunningProcessesSnapshot):
             "%s %s \n" %
             (p.timestamp, str(p.running_processes))
         )
-

@@ -6,7 +6,6 @@ from datetime import datetime
 import psutil
 import requests
 
-
 parser = argparse.ArgumentParser(
     description='This is an application that sends a list of currently running processes to a specified server every '
                 'five seconds.'
