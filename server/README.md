@@ -8,5 +8,6 @@ Run for development with `uvicorn server:app --reload` or `python server.py`
 ### Production
 
 IMPORTANT: Before starting you must add the client server(s) to the host whitelist
+(see server.py)
 
 Run for production with ` uvicorn server:app --host 0.0.0.0 --port 8000`
