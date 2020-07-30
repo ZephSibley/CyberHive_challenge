@@ -1,3 +1,6 @@
 ### Features to consider
-poetry for managing deps
+- TLS
+- poetry for managing deps
+- config management
+- monitoring
 
